@@ -26,3 +26,10 @@ This is my first fully coded website, I'm just gonna make some notes so I can re
 7. Create a new file inside repository:
         a. Name: "CNAME"
         b. Line 1: "<domain.address>"
+
+
+03/14/26
+Buffalo, NY
+
+Notes:
+Inshallah I created the actual website guts, my html skills have sharpened. Lockheed Martin is calling
