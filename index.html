@@ -1,47 +1,686 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Drew Villani — Mechanical Engineer, University at Buffalo</title>
-  <meta name="description" content="Mechanical engineering portfolio — Projects & Coursework." />
-  <link rel="icon" href="/assets/images/favicon.ico" />
-  <link rel="stylesheet" href="/assets/css/style.css" />
-  <!-- Optional: Tailwind CDN for quick styling -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mechanical Engineering Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #121821;
+      --panel-2: #171f2b;
+      --text: #e8eef7;
+      --muted: #a8b3c2;
+      --line: #253041;
+      --accent: #7cc7ff;
+      --accent-2: #c7f0ff;
+      --max-width: 1120px;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #0b0f14 0%, #0d131b 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 2rem, var(--max-width));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 0.55rem;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.9rem);
+      letter-spacing: -0.04em;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      letter-spacing: -0.03em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.65rem;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    .lead {
+      max-width: 700px;
+      font-size: 1.05rem;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+      background: rgba(11, 15, 20, 0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 72px;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: #091018;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-weight: 800;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 5.5rem 0 4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-card,
+    .card,
+    .project-card,
+    .contact-card {
+      background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: clamp(1.4rem, 3vw, 2.5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 420px;
+    }
+
+    .hero-subtitle {
+      margin: 0.9rem 0 1.25rem;
+      color: var(--accent);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      margin-top: 1.4rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 46px;
+      padding: 0.8rem 1.15rem;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font-weight: 600;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: #3a4b62;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #091018;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+    }
+
+    .hero-card {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hero-image {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #0e141d;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    .stat {
+      padding: 0.95rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .card {
+      padding: 1.35rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      overflow: hidden;
+    }
+
+    .project-image {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: #0e141d;
+    }
+
+    .project-body {
+      padding: 1.2rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin: 0.95rem 0 1rem;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.86rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .project-links a {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-list {
+      list-style: none;
+      display: grid;
+      gap: 0.55rem;
+      margin-top: 0.8rem;
+    }
+
+    .skill-list li {
+      color: var(--muted);
+      padding-left: 0.95rem;
+      position: relative;
+    }
+
+    .skill-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .resume-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .contact-card {
+      padding: 1.35rem;
+    }
+
+    .contact-list {
+      list-style: none;
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 0.75rem;
+    }
+
+    .contact-list a {
+      color: var(--accent);
+      word-break: break-word;
+    }
+
+    .site-footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.25rem 0 2rem;
+    }
+
+    .site-footer p {
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-2,
+      .project-grid,
+      .skills-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.85rem 0;
+      }
+
+      .nav-links {
+        gap: 0.85rem;
+      }
+
+      .hero {
+        padding-top: 3.5rem;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 4rem 0;
+      }
+    }
+  </style>
 </head>
-<body class="bg-white text-slate-800">
-  <header class="max-w-4xl mx-auto p-6 flex justify-between items-center">
-    <h1 class="text-2xl font-semibold">Drew Villani</h1>
-    <nav>
-      <a href="#projects" class="mr-4">Projects</a>
-      <a href="#about" class="mr-4">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#top" class="brand">
+        <span class="brand-badge">DV</span>
+        <span>Drew Villani</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="max-w-4xl mx-auto p-6">
-    <section id="hero" class="mb-8">
-      <h2 class="text-xl font-bold">Mechanical Engineering Undergraduate • University at Buffalo</h2>
-      <p class="mt-2">I design mechanical systems and build simulations. Current intern at On Top Safety Co.</p>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Mechanical Engineering Portfolio</p>
+          <h1>Drew Villani</h1>
+          <p class="hero-subtitle">Mechanical Engineering Undergraduate • Mechnanical Design • Analysis • Prototyping</p>
+          <p class="lead">
+            I build practical engineering solutions through CAD, testing, computation, and hands-on design.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View Projects</a>
+            <a class="btn btn-secondary" href="#resume">Resume</a>
+            <a class="btn btn-secondary" href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <div class="hero-image">
+            <img src="images/profile.jpg" alt="Profile or featured engineering project image" />
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <strong>3+</strong>
+              <span>Featured Projects</span>
+            </div>
+            <div class="stat">
+              <strong>CAD</strong>
+              <span>Design Focus</span>
+            </div>
+            <div class="stat">
+              <strong>Build</strong>
+              <span>Prototype Mindset</span>
+            </div>
+          </div>
+        </aside>
+      </div>
     </section>
 
-    <section id="projects" class="grid gap-6 md:grid-cols-2">
-      <!-- Project card -->
-      <article class="border p-4 rounded">
-        <h3 class="font-semibold">Microwave Simulator FPGA</h3>
-        <p class="text-sm mt-1">DE10-Lite, VHDL, motor control, seven-seg.</p>
-        <a href="https://github.com/yourusername/repo" target="_blank">Repo →</a>
-      </article>
+    <section id="about" class="section">
+      <div class="container grid-2">
+        <div class="card">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">About</p>
+              <h2>Who I Am</h2>
+            </div>
+          </div>
+          <p>
+            I am a mechanical engineering student interested in design, materials, prototyping, and engineering analysis.
+            I enjoy taking a concept from idea to tested solution using CAD, calculations, and iteration.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Focus</p>
+              <h2>What I Work On</h2>
+            </div>
+          </div>
+          <p>
+            My work includes mechanical design, 3D printing, simulation, MATLAB-based tools, and project-based problem solving.
+            I like work that combines theory with something physical, measurable, and useful.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Projects</p>
+            <h2>Selected Work</h2>
+          </div>
+          <p class="lead">Replace the sample images and text below with your own projects.</p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/project-1.jpg" alt="Project 1 image" />
+            </div>
+            <div class="project-body">
+              <h3>Project Title One</h3>
+              <p>
+                Briefly explain the goal, what you designed or analyzed, and the result. Keep it clear and technical.
+              </p>
+              <div class="tags">
+                <span class="tag">SolidWorks</span>
+                <span class="tag">MATLAB</span>
+                <span class="tag">Prototype</span>
+              </div>
+              <div class="project-links">
+                <a href="#">Case Study</a>
+                <a href="#">GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/project-2.jpg" alt="Project 2 image" />
+            </div>
+            <div class="project-body">
+              <h3>Project Title Two</h3>
+              <p>
+                Describe the engineering problem, your process, and the main takeaway. Mention tools and methods used.
+              </p>
+              <div class="tags">
+                <span class="tag">Fusion 360</span>
+                <span class="tag">3D Printing</span>
+                <span class="tag">Testing</span>
+              </div>
+              <div class="project-links">
+                <a href="#">Case Study</a>
+                <a href="#">Files</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/project-3.jpg" alt="Project 3 image" />
+            </div>
+            <div class="project-body">
+              <h3>Project Title Three</h3>
+              <p>
+                Use this area to summarize a build, analysis, lab, internship task, or design project with a strong result.
+              </p>
+              <div class="tags">
+                <span class="tag">Analysis</span>
+                <span class="tag">Mechanics</span>
+                <span class="tag">Design</span>
+              </div>
+              <div class="project-links">
+                <a href="#">Case Study</a>
+                <a href="#">Images</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Skills</p>
+            <h2>Tools and Capabilities</h2>
+          </div>
+        </div>
+
+        <div class="skills-grid">
+          <div class="card">
+            <h3>CAD</h3>
+            <ul class="skill-list">
+              <li>SolidWorks</li>
+              <li>Fusion 360</li>
+              <li>Technical Drawing</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Analysis</h3>
+            <ul class="skill-list">
+              <li>MATLAB</li>
+              <li>Engineering Calculations</li>
+              <li>Data Interpretation</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Fabrication</h3>
+            <ul class="skill-list">
+              <li>3D Printing</li>
+              <li>Prototype Assembly</li>
+              <li>Design Iteration</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Engineering Areas</h3>
+            <ul class="skill-list">
+              <li>Mechanics</li>
+              <li>Thermodynamics</li>
+              <li>Materials</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resume" class="section">
+      <div class="container">
+        <div class="card resume-box">
+          <div>
+            <p class="eyebrow">Resume</p>
+            <h2>Download My Resume</h2>
+            <p>Add your PDF file and link it here.</p>
+          </div>
+          <a class="btn btn-primary" href="resume.pdf" target="_blank" rel="noopener noreferrer">Open Resume</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container contact-grid">
+        <div class="contact-card">
+          <p class="eyebrow">Contact</p>
+          <h2>Get In Touch</h2>
+          <p>
+            Use this section for professional contact information and links.
+          </p>
+        </div>
+
+        <div class="contact-card">
+          <h3>Links</h3>
+          <ul class="contact-list">
+            <li>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></li>
+            <li>GitHub: <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">github.com/yourusername</a></li>
+            <li>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">linkedin.com/in/yourprofile</a></li>
+          </ul>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer class="max-w-4xl mx-auto p-6 text-center text-sm">
-    © <span id="year"></span> D Money — <a href="https://github.com/yourusername">GitHub</a>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Your Name. Built for a mechanical engineering portfolio.</p>
+    </div>
   </footer>
-
-  <script src="/assets/js/main.js"></script>
 </body>
 </html>
-
-
