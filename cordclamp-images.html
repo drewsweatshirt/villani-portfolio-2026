@@ -1,1 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cord Runner - Clamp System | Drew Villani</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #121821;
+      --panel-2: #171f2b;
+      --text: #e8eef7;
+      --muted: #a8b3c2;
+      --line: #253041;
+      --accent: #7cc7ff;
+      --accent-2: #c7f0ff;
+      --max-width: 980px;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.22);
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #0b0f14 0%, #0d131b 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .container {
+      width: min(100% - 2rem, var(--max-width));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+      background: rgba(11, 15, 20, 0.78);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: #091018;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-weight: 800;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .home-link {
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 4.5rem 0 2rem;
+    }
+
+    .hero-card,
+    .content-block {
+      background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 1.5rem;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 0.55rem;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      letter-spacing: -0.04em;
+      margin-bottom: 0.85rem;
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    .hero-text {
+      max-width: 760px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0.8rem 1.05rem;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font-weight: 600;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: #3a4b62;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #091018;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+    }
+
+    .section {
+      padding: 1.25rem 0 2rem;
+    }
+
+    .content-block {
+      overflow: hidden;
+    }
+
+    .image-wrap {
+      background: #0e141d;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .image-wrap img {
+      max-height: 620px;
+    }
+
+    .text-wrap {
+      padding: 1.35rem;
+    }
+
+    .text-wrap p + p {
+      margin-top: 0.95rem;
+    }
+
+    .footer-space {
+      height: 2rem;
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        padding: 0.9rem 0;
+      }
+
+      .hero {
+        padding-top: 3.5rem;
+      }
+
+      .text-wrap {
+        padding: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="brand">
+        <span class="brand-badge">DV</span>
+        <span>Drew Villani</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#concept">Concept</a>
+        <a href="#iterations">Iterations</a>
+        <a href="#final">Final Direction</a>
+        <a class="home-link" href="index.html">Back to Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <p class="eyebrow">Project Gallery</p>
+          <h1>Cord Runner - Clamp System</h1>
+          <p class="hero-text">
+            This page shows the design progression of my cord runner clamp system. I kept the layout simple so each stage can focus on one large image and one body of explanation, making it easier to show the purpose of the design, the engineering choices behind it, and what changed through iteration.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#concept">View Project</a>
+            <a class="btn btn-secondary" href="index.html">Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="section">
+      <div class="container">
+        <div class="content-block">
+          <div class="text-wrap">
+            <p class="eyebrow">Overview</p>
+            <h2>Project Goal</h2>
+            <p>
+              The goal of this project was to create a clamp-based system for routing fragile lines, cords, and hoses through a construction environment in a more controlled and protective way. The design had to be practical, durable, manufacturable, and useful in real conditions.
+            </p>
+            <p>
+              This page is arranged so I can document each major design stage with large visuals and direct written explanation underneath them.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="concept" class="section">
+      <div class="container">
+        <div class="content-block">
+          <div class="image-wrap">
+            <img src="ots-cordclamp-2.png" alt="Initial cord runner clamp system concept">
+          </div>
+          <div class="text-wrap">
+            <p class="eyebrow">Section 1</p>
+            <h2>Initial Concept</h2>
+            <p>
+              Use this section to explain the original idea for the clamp system. Describe the problem it was meant to solve, what the early geometry was trying to accomplish, and what requirements shaped the first version.
+            </p>
+            <p>
+              This is a good place to explain channel shape, how the clamp was intended to attach, and what practical use case drove the design.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="iterations" class="section">
+      <div class="container">
+        <div class="content-block">
+          <div class="image-wrap">
+            <img src="ots-cordclamp-2.png" alt="Cord runner clamp design iteration">
+          </div>
+          <div class="text-wrap">
+            <p class="eyebrow">Section 2</p>
+            <h2>Design Iteration</h2>
+            <p>
+              Use this section for a later revision. Explain what changed from the first concept and why. You can describe improvements in grip, geometry, durability, fitment, material choice, or printability.
+            </p>
+            <p>
+              Keep this section focused on the engineering choices behind the changes. What was not working at first, and what adjustments helped improve the design?
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="content-block">
+          <div class="image-wrap">
+            <img src="ots-cordclamp-2.png" alt="Cord runner clamp prototype or refined model">
+          </div>
+          <div class="text-wrap">
+            <p class="eyebrow">Section 3</p>
+            <h2>Prototype or Refined Revision</h2>
+            <p>
+              This section works well for a printed prototype, an assembly image, or a refined CAD stage. Explain what was learned from this version and how real-world testing or review changed the design direction.
+            </p>
+            <p>
+              You can also use this section to discuss material behavior, feature strength, assembly concerns, or how the part responded to practical use.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="final" class="section">
+      <div class="container">
+        <div class="content-block">
+          <div class="image-wrap">
+            <img src="ots-cordclamp-2.png" alt="Final cord runner clamp system direction">
+          </div>
+          <div class="text-wrap">
+            <p class="eyebrow">Section 4</p>
+            <h2>Final Direction</h2>
+            <p>
+              Use this section to show the most refined version of the clamp system and explain why it became the final direction. Focus on the strongest design decisions, practical improvements, and why the final version best satisfied the original goal.
+            </p>
+            <p>
+              End this section with what you learned from the overall process, including product design lessons, prototyping lessons, and what you would improve next.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-space"></div>
+  </main>
+</body>
+</html>
