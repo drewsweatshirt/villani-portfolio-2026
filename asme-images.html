@@ -15,7 +15,7 @@
       --line: #253041;
       --accent: #7cc7ff;
       --accent-2: #c7f0ff;
-      --max-width: 1120px;
+      --max-width: 980px;
       --radius: 18px;
       --shadow: 0 10px 30px rgba(0,0,0,0.22);
     }
@@ -34,7 +34,7 @@
       font-family: Inter, Arial, Helvetica, sans-serif;
       background: linear-gradient(180deg, #0b0f14 0%, #0d131b 100%);
       color: var(--text);
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
     a {
@@ -46,7 +46,6 @@
       display: block;
       width: 100%;
       height: auto;
-      border-radius: 14px;
       object-fit: cover;
     }
 
@@ -96,7 +95,7 @@
     .nav-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.1rem;
+      gap: 1rem;
       align-items: center;
     }
 
@@ -119,14 +118,11 @@
     }
 
     .hero {
-      padding: 4.75rem 0 2.5rem;
+      padding: 4.5rem 0 2rem;
     }
 
     .hero-card,
-    .card,
-    .image-card,
-    .text-block,
-    .timeline-item {
+    .content-block {
       background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -134,11 +130,7 @@
     }
 
     .hero-card {
-      padding: 1.6rem;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 1.25rem;
-      align-items: center;
+      padding: 1.5rem;
     }
 
     .eyebrow {
@@ -154,39 +146,30 @@
     }
 
     h1 {
-      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
       letter-spacing: -0.04em;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.85rem;
     }
 
     h2 {
-      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
       letter-spacing: -0.03em;
-      margin-bottom: 0.9rem;
-    }
-
-    h3 {
-      font-size: 1.08rem;
-      margin-bottom: 0.55rem;
+      margin-bottom: 0.75rem;
     }
 
     p {
       color: var(--muted);
     }
 
-    .hero-image {
-      aspect-ratio: 16 / 11;
-      overflow: hidden;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: #0e141d;
+    .hero-text {
+      max-width: 760px;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 0.8rem;
-      margin-top: 1.3rem;
+      margin-top: 1.2rem;
     }
 
     .btn {
@@ -218,82 +201,32 @@
     }
 
     .section {
-      padding: 1.5rem 0 2.2rem;
+      padding: 1.25rem 0 2rem;
     }
 
-    .section-header {
-      margin-bottom: 1.25rem;
-    }
-
-    .stats-grid,
-    .text-grid,
-    .gallery-grid {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .stats-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .card {
-      padding: 1.2rem;
-    }
-
-    .card strong {
-      display: block;
-      font-size: 1.05rem;
-      margin-bottom: 0.35rem;
-      color: var(--text);
-    }
-
-    .text-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .text-block {
-      padding: 1.3rem;
-    }
-
-    .gallery-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .image-card {
+    .content-block {
       overflow: hidden;
     }
 
     .image-wrap {
-      aspect-ratio: 16 / 10;
-      overflow: hidden;
-      border-bottom: 1px solid var(--line);
       background: #0e141d;
+      border-bottom: 1px solid var(--line);
     }
 
-    .image-body {
-      padding: 1.1rem;
+    .image-wrap img {
+      max-height: 620px;
     }
 
-    .timeline {
-      display: grid;
-      gap: 1rem;
+    .text-wrap {
+      padding: 1.35rem;
     }
 
-    .timeline-item {
-      padding: 1.2rem;
+    .text-wrap p + p {
+      margin-top: 0.95rem;
     }
 
     .footer-space {
       height: 2rem;
-    }
-
-    @media (max-width: 900px) {
-      .hero-card,
-      .stats-grid,
-      .text-grid,
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     @media (max-width: 640px) {
@@ -303,6 +236,10 @@
 
       .hero {
         padding-top: 3.5rem;
+      }
+
+      .text-wrap {
+        padding: 1.1rem;
       }
     }
   </style>
@@ -314,11 +251,12 @@
         <span class="brand-badge">DV</span>
         <span>Drew Villani</span>
       </a>
+
       <nav class="nav-links">
         <a href="#overview">Overview</a>
-        <a href="#process">Process</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#thoughts">Notes</a>
+        <a href="#concept">Concept</a>
+        <a href="#iterations">Iterations</a>
+        <a href="#final">Final Direction</a>
         <a class="home-link" href="index.html">Back to Home</a>
       </nav>
     </div>
@@ -328,19 +266,15 @@
     <section class="hero">
       <div class="container">
         <div class="hero-card">
-          <div>
-            <p class="eyebrow">Project Gallery</p>
-            <h1>Payload Rover - ASME</h1>
-            <p>
-              This page documents the design progression, prototyping decisions, testing logic, and overall engineering thought process behind the ASME payload rover chassis.
-            </p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#gallery">View Images</a>
-              <a class="btn btn-secondary" href="#thoughts">Read Notes</a>
-            </div>
-          </div>
-          <div class="hero-image">
-            <img src="asme-chassis-1.JPEG" alt="ASME rover chassis main image" />
+          <p class="eyebrow">Project Gallery</p>
+          <h1>Payload Rover - ASME</h1>
+          <p class="hero-text">
+            This page shows the design progression of my ASME payload rover chassis. I wanted a simpler layout here so each section can focus on one large image and one body of explanation, making it easier to show design progress, engineering decisions, and what changed between versions.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#concept">View Project</a>
+            <a class="btn btn-secondary" href="index.html">Back to Home</a>
           </div>
         </div>
       </div>
@@ -348,151 +282,95 @@
 
     <section id="overview" class="section">
       <div class="container">
-        <div class="section-header">
-          <p class="eyebrow">Overview</p>
-          <h2>Project Summary</h2>
-        </div>
-
-        <div class="stats-grid">
-          <div class="card">
-            <strong>Objective</strong>
-            <p>Design and build a functional rover chassis that satisfies competition limits while remaining printable, lightweight, and structurally useful.</p>
-          </div>
-          <div class="card">
-            <strong>Tools Used</strong>
-            <p>Fusion 360, CAD iteration, prototyping, structural thinking, and design-for-manufacturing decisions.</p>
-          </div>
-          <div class="card">
-            <strong>Main Focus</strong>
-            <p>Balancing stiffness, weight, packaging, printability, and competition-oriented performance.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="process" class="section">
-      <div class="container">
-        <div class="section-header">
-          <p class="eyebrow">Process</p>
-          <h2>Design and Development</h2>
-        </div>
-
-        <div class="text-grid">
-          <div class="text-block">
-            <h3>Design Intent</h3>
+        <div class="content-block">
+          <div class="text-wrap">
+            <p class="eyebrow">Overview</p>
+            <h2>Project Goal</h2>
             <p>
-              Use this section to explain your original design goal, the rules you had to follow, what constraints mattered most, and what you wanted the chassis to do mechanically.
+              The goal of this project was to design and build a fully 3D printed payload rover chassis that could satisfy competition constraints while remaining lightweight, functional, and structurally effective. The design had to balance packaging, strength, printability, and overall practicality.
             </p>
             <p>
-              This is a good place to describe your packaging limits, wheel placement logic, payload support, member layout, and why the geometry started the way it did.
-            </p>
-          </div>
-
-          <div class="text-block">
-            <h3>Engineering Decisions</h3>
-            <p>
-              Use this area for explaining why certain members were added, removed, thickened, angled, or split. You can also describe how print orientation, joint style, and part strength affected the design.
-            </p>
-            <p>
-              This is also a strong spot for discussing tradeoffs between stiffness, material use, and manufacturability.
+              This page is set up so I can document each major stage of the chassis development process with large visuals and direct explanations underneath them.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="gallery" class="section">
+    <section id="concept" class="section">
       <div class="container">
-        <div class="section-header">
-          <p class="eyebrow">Gallery</p>
-          <h2>Progress Images</h2>
-        </div>
-
-        <div class="gallery-grid">
-          <article class="image-card">
-            <div class="image-wrap">
-              <img src="asme-chassis-1.JPEG" alt="ASME rover chassis image 1" />
-            </div>
-            <div class="image-body">
-              <h3>Initial Concept</h3>
-              <p>
-                Explain what this version shows, what stage it belongs to, and what key design ideas were first established here.
-              </p>
-            </div>
-          </article>
-
-          <article class="image-card">
-            <div class="image-wrap">
-              <img src="asme-chassis-1.JPEG" alt="ASME rover chassis image 2 placeholder" />
-            </div>
-            <div class="image-body">
-              <h3>Structural Revision</h3>
-              <p>
-                Use this card for a later revision, updated member arrangement, or more refined geometry after testing or analysis.
-              </p>
-            </div>
-          </article>
-
-          <article class="image-card">
-            <div class="image-wrap">
-              <img src="asme-chassis-1.JPEG" alt="ASME rover chassis image 3 placeholder" />
-            </div>
-            <div class="image-body">
-              <h3>Prototype Stage</h3>
-              <p>
-                Show a printed or assembled stage here and explain what you learned from physical fit, rigidity, and manufacturing results.
-              </p>
-            </div>
-          </article>
-
-          <article class="image-card">
-            <div class="image-wrap">
-              <img src="asme-chassis-1.JPEG" alt="ASME rover chassis image 4 placeholder" />
-            </div>
-            <div class="image-body">
-              <h3>Final Direction</h3>
-              <p>
-                Use this block to show the direction you committed to and explain why it best met the performance and design requirements.
-              </p>
-            </div>
-          </article>
+        <div class="content-block">
+          <div class="image-wrap">
+            <img src="asme-chassis-1.JPEG" alt="Initial ASME payload rover chassis concept">
+          </div>
+          <div class="text-wrap">
+            <p class="eyebrow">Section 1</p>
+            <h2>Initial Concept</h2>
+            <p>
+              Use this section to explain the first version of the rover chassis. Describe what the geometry was trying to accomplish, what constraints you were designing around, and what major requirements drove the initial layout.
+            </p>
+            <p>
+              This is also a good place to explain wheelbase decisions, general frame shape, how the payload area was considered, and what you expected the structure to do before testing or refinement.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="thoughts" class="section">
+    <section id="iterations" class="section">
       <div class="container">
-        <div class="section-header">
-          <p class="eyebrow">Notes</p>
-          <h2>Research, Analysis, and Thoughts</h2>
+        <div class="content-block">
+          <div class="image-wrap">
+            <img src="asme-chassis-1.JPEG" alt="ASME payload rover chassis design iteration">
+          </div>
+          <div class="text-wrap">
+            <p class="eyebrow">Section 2</p>
+            <h2>Design Iteration</h2>
+            <p>
+              Use this section for a later revision. Explain what changed from the earlier version and why. You can discuss frame members, stiffness concerns, joint decisions, printability, or any issues you noticed after reviewing the first design.
+            </p>
+            <p>
+              Keep this section focused on the engineering thought process. What was weak, what needed to be improved, and what choices helped move the design in a better direction?
+            </p>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="timeline">
-          <div class="timeline-item">
-            <h3>Problem Framing</h3>
+    <section class="section">
+      <div class="container">
+        <div class="content-block">
+          <div class="image-wrap">
+            <img src="asme-chassis-1.JPEG" alt="ASME payload rover prototype or structural revision">
+          </div>
+          <div class="text-wrap">
+            <p class="eyebrow">Section 3</p>
+            <h2>Prototype or Structural Revision</h2>
             <p>
-              Write about what problem the chassis needed to solve and what made the problem difficult from an engineering perspective.
+              This section works well for a printed prototype, a more detailed CAD stage, or a structural revision informed by physical testing or calculations. Explain what you learned from this version and how it changed your confidence in the design.
+            </p>
+            <p>
+              You can also use this section to describe any load concerns, member behavior, manufacturing limitations, or weight-saving ideas.
             </p>
           </div>
+        </div>
+      </div>
+    </section>
 
-          <div class="timeline-item">
-            <h3>Simulation or Structural Thinking</h3>
-            <p>
-              Use this for FEA discussion, hand calculations, expected load paths, stress concerns, or how you estimated where material mattered most.
-            </p>
+    <section id="final" class="section">
+      <div class="container">
+        <div class="content-block">
+          <div class="image-wrap">
+            <img src="asme-chassis-1.JPEG" alt="Final ASME payload rover chassis direction">
           </div>
-
-          <div class="timeline-item">
-            <h3>Iteration Reflections</h3>
+          <div class="text-wrap">
+            <p class="eyebrow">Section 4</p>
+            <h2>Final Direction</h2>
             <p>
-              Explain what changed between versions, what failed, what improved, and how each iteration moved the project closer to a better design.
+              Use this section to show the most refined version of the chassis and explain why it became the chosen direction. Focus on the final improvements, the best design choices, and what this version achieved better than the earlier ones.
             </p>
-          </div>
-
-          <div class="timeline-item">
-            <h3>What You Learned</h3>
             <p>
-              End with the key technical lessons, design lessons, and what you would improve next if you continued the project.
+              End this section with what you learned from the overall project, including design lessons, manufacturing lessons, and what you would improve next.
             </p>
           </div>
         </div>
