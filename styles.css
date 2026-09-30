@@ -1,24 +1,38 @@
+:root {
+  --bg: #303034;          /* Space gray background */
+  --panel: #000000;       /* Black information blocks */
+  --panel-2: #000000;
+  --text: #eeeeee;
+  --muted: #b5b5b5;
+  --line: #3b3b3f;
+  --accent: #9c0414;      /* Red sampled from your shirt */
+  --accent-2: #9c0414;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #eed4d4;
-  color: #eec4c4;
+  background: var(--bg);
 }
 
-header {
-  background-color: #222;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
+/* Navigation background */
+.site-header {
+  background: rgba(0, 0, 0, 0.85);
 }
 
-nav a {
-  color: #fff;
-  margin: 0 15px;
-  text-decoration: none;
+/* Backgrounds behind images */
+.hero-image,
+.project-image,
+.image-wrap {
+  background: var(--panel);
 }
 
-nav a:hover {
-  text-decoration: underline;
+/* White lettering on red buttons and the DV badge */
+.btn-primary,
+.brand-badge {
+  color: #ffffff;
+}
+
+/* Replace remaining blue hover borders */
+.btn:hover,
+.project-card-link:hover .project-card {
+  border-color: #68686c;
 }
